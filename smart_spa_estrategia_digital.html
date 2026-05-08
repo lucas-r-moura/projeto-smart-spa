@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart Spa — Estratégia Digital Premium</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8D08A;
+    --gold-dark: #8B6914;
+    --navy: #0A1628;
+    --navy-mid: #0F2040;
+    --navy-light: #1A3060;
+    --teal: #00B4A6;
+    --teal-light: #7FE0D8;
+    --white: #F8F6F0;
+    --gray: #8A9BB0;
+    --surface: rgba(255,255,255,0.04);
+    --border: rgba(201,168,76,0.2);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--navy);
+    color: var(--white);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 80px 40px;
+    position: relative;
+    background: 
+      radial-gradient(ellipse 80% 60% at 50% -10%, rgba(0,180,166,0.15) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 40% at 80% 80%, rgba(201,168,76,0.08) 0%, transparent 50%),
+      var(--navy);
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: 
+      linear-gradient(rgba(201,168,76,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201,168,76,0.05) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse at center, black 20%, transparent 80%);
+  }
+
+  .hero-tag {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--teal);
+    border: 1px solid rgba(0,180,166,0.3);
+    padding: 6px 18px;
+    border-radius: 100px;
+    margin-bottom: 32px;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(42px, 7vw, 96px);
+    font-weight: 900;
+    line-height: 1.0;
+    letter-spacing: -2px;
+    margin-bottom: 12px;
+  }
+
+  .hero h1 .accent { color: var(--gold); }
+
+  .hero-subtitle {
+    font-size: 18px;
+    color: var(--gray);
+    max-width: 580px;
+    margin: 24px auto 48px;
+    font-weight: 300;
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 60px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .stat { text-align: center; }
+
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    font-weight: 700;
+    color: var(--gold);
+    display: block;
+  }
+
+  .stat-label {
+    font-size: 12px;
+    color: var(--gray);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .section-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 0;
+    opacity: 0.3;
+  }
+
+  /* ─── SECTIONS ─── */
+  section {
+    padding: 100px 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 20px;
+  }
+
+  .section-lead {
+    font-size: 17px;
+    color: var(--gray);
+    max-width: 700px;
+    margin-bottom: 60px;
+    font-weight: 300;
+  }
+
+  /* ─── FRENTES DE ATUAÇÃO ─── */
+  .frentes-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 16px;
+  }
+
+  @media (max-width: 1100px) {
+    .frentes-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  @media (max-width: 700px) {
+    .frentes-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  .frente-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 36px 24px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.35s ease;
+    cursor: default;
+  }
+
+  .frente-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--teal), var(--gold));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.35s ease;
+    border-radius: 0 0 20px 20px;
+  }
+
+  .frente-card:hover {
+    border-color: rgba(201,168,76,0.5);
+    transform: translateY(-6px);
+    box-shadow: 0 24px 60px rgba(0,0,0,0.35);
+  }
+
+  .frente-card:hover::after { transform: scaleX(1); }
+
+  .frente-icon {
+    font-size: 40px;
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .frente-tag {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 10px;
+  }
+
+  .frente-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: var(--white);
+  }
+
+  .frente-card p {
+    font-size: 13px;
+    color: var(--gray);
+    line-height: 1.7;
+  }
+
+  /* ─── ESTRATÉGIAS GRID ─── */
+  .strategies-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 24px;
+  }
+
+  .strategy-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 36px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .strategy-card:hover {
+    border-color: rgba(201,168,76,0.5);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  }
+
+  .strategy-card.featured {
+    border-color: rgba(201,168,76,0.4);
+    background: linear-gradient(135deg, rgba(201,168,76,0.06) 0%, var(--surface) 100%);
+  }
+
+  .card-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 72px;
+    font-weight: 900;
+    color: rgba(201,168,76,0.08);
+    position: absolute;
+    top: 20px;
+    right: 24px;
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .card-icon { font-size: 32px; margin-bottom: 20px; display: block; }
+
+  .card-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  .strategy-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    line-height: 1.2;
+  }
+
+  .strategy-card p {
+    font-size: 14px;
+    color: var(--gray);
+    line-height: 1.7;
+    margin-bottom: 24px;
+  }
+
+  .card-bullets { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+
+  .card-bullets li {
+    font-size: 13px;
+    color: var(--gray);
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .card-bullets li::before {
+    content: '→';
+    color: var(--gold);
+    flex-shrink: 0;
+    font-weight: 600;
+  }
+
+  /* ─── FUNIL DE RECEITA ─── */
+  .revenue-funnel {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .funnel-tier {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 28px 36px;
+    border-radius: 16px;
+    margin-bottom: 4px;
+    transition: all 0.3s ease;
+    cursor: default;
+  }
+
+  .funnel-tier:hover { transform: scale(1.01); }
+
+  .tier-free  { background: rgba(138,155,176,0.10); border: 1px solid rgba(138,155,176,0.20); width: 100%; }
+  .tier-entry { background: rgba(0,180,166,0.08);   border: 1px solid rgba(0,180,166,0.20);   width: 90%; align-self: center; }
+  .tier-core  { background: rgba(201,168,76,0.08);   border: 1px solid rgba(201,168,76,0.25);  width: 78%; align-self: center; }
+  .tier-premium { background: linear-gradient(135deg, rgba(201,168,76,0.15), rgba(139,105,20,0.1)); border: 1px solid rgba(201,168,76,0.5); width: 62%; align-self: center; }
+  .tier-elite   { background: linear-gradient(135deg, rgba(201,168,76,0.25), rgba(139,105,20,0.2)); border: 2px solid var(--gold); width: 46%; align-self: center; }
+
+  .tier-icon { font-size: 28px; flex-shrink: 0; }
+  .tier-info { flex: 1; }
+  .tier-name { font-weight: 600; font-size: 15px; margin-bottom: 2px; }
+  .tier-desc { font-size: 12px; color: var(--gray); }
+
+  .tier-price {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--gold);
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  .tier-price span {
+    display: block;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    color: var(--gray);
+    font-weight: 400;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  /* ─── FOOTER ─── */
+  .footer {
+    background: var(--navy-mid);
+    border-top: 1px solid var(--border);
+    padding: 120px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .footer::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 70% at 50% 110%, rgba(201,168,76,0.1) 0%, transparent 65%),
+      radial-gradient(ellipse 50% 40% at 15% 0%, rgba(0,180,166,0.07) 0%, transparent 60%);
+  }
+
+  .footer-inner { position: relative; z-index: 1; }
+
+  .footer-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--teal);
+    display: inline-block;
+    border: 1px solid rgba(0,180,166,0.3);
+    padding: 6px 20px;
+    border-radius: 100px;
+    margin-bottom: 48px;
+  }
+
+  .footer h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(34px, 4.5vw, 60px);
+    font-weight: 900;
+    line-height: 1.18;
+    max-width: 780px;
+    margin: 0 auto;
+    letter-spacing: -1.5px;
+  }
+
+  .footer h3 .gold { color: var(--gold); }
+
+  .footer-amplifica {
+    font-size: 24px;
+    font-weight: 300;
+    color: var(--gray);
+    margin-top: 28px;
+    letter-spacing: 0.3px;
+    line-height: 1.5;
+  }
+
+  .footer-amplifica strong {
+    color: var(--white);
+    font-weight: 700;
+    font-size: 28px;
+  }
+
+  .footer-line {
+    width: 100px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--teal), var(--gold));
+    margin: 60px auto 0;
+    border-radius: 2px;
+  }
+
+  /* ─── FULL-WIDTH ─── */
+  .full-width { padding: 0; }
+  .full-width section { padding: 100px 40px; }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 20px rgba(201,168,76,0.2); }
+    50%       { box-shadow: 0 0 40px rgba(201,168,76,0.5); }
+  }
+  .pulse { animation: pulse-glow 3s ease-in-out infinite; }
+
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--navy); }
+  ::-webkit-scrollbar-thumb { background: var(--gold-dark); border-radius: 2px; }
+</style>
+</head>
+<body>
+
+<!-- ═══ HERO ═══ -->
+<div class="hero">
+  <div class="hero-tag">Estratégia Digital Premium · Smart Spa 2026</div>
+  <h1>O Futuro do<br><span class="accent">Emagrecimento</span><br>é Inteligente</h1>
+  <p class="hero-subtitle">Como transformar a Smart Spa numa plataforma de saúde premium com IA, experiências digitais e estratégias que nenhum concorrente tem.</p>
+  <div class="hero-stats">
+    <div class="stat">
+      <span class="stat-num">100k</span>
+      <span class="stat-label">Clientes Atendidos</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">20+</span>
+      <span class="stat-label">Anos de Expertise</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">5x</span>
+      <span class="stat-label">Potencial de Escala</span>
+    </div>
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ═══ FRENTES DE ATUAÇÃO ═══ -->
+<section>
+  <span class="section-tag">Digital Growth · Frentes de Atuação</span>
+  <h2>6 frentes para construir<br>o crescimento digital</h2>
+  <p class="section-lead">O projeto de Digital Growth da Smart Spa atua de forma integrada em seis pilares — cada um essencial para transformar a operação e escalar com solidez.</p>
+
+  <div class="frentes-grid">
+
+    <div class="frente-card">
+      <span class="frente-tag">Pilar 01</span>
+      <span class="frente-icon">🗣️</span>
+      <h3>Comunicação</h3>
+      <p>Construção de uma linguagem de marca clara, consistente e premium — que posicione a Smart Spa como referência em transformação metabólica no digital.</p>
+    </div>
+
+    <div class="frente-card">
+      <span class="frente-tag">Pilar 02</span>
+      <span class="frente-icon">🎙️</span>
+      <h3>Oratória</h3>
+      <p>Capacitação dos profissionais da equipe para comunicar com autoridade — em lives, vídeos e apresentações — transformando expertise clínica em influência real.</p>
+    </div>
+
+    <div class="frente-card">
+      <span class="frente-tag">Pilar 03</span>
+      <span class="frente-icon">💼</span>
+      <h3>Vendas</h3>
+      <p>Estruturação de processos comerciais para o digital: funil, abordagem consultiva, scripts e follow-up — aumentando conversão sem depender de volume.</p>
+    </div>
+
+    <div class="frente-card">
+      <span class="frente-tag">Pilar 04</span>
+      <span class="frente-icon">📣</span>
+      <h3>Marketing</h3>
+      <p>Estratégias de atração e retenção com conteúdo de autoridade, tráfego pago e orgânico — construindo uma audiência qualificada e constante de novos leads.</p>
+    </div>
+
+    <div class="frente-card">
+      <span class="frente-tag">Pilar 05</span>
+      <span class="frente-icon">⚙️</span>
+      <h3>Tecnologia</h3>
+      <p>Implementação de ferramentas digitais — IA, automações, plataformas e relatórios inteligentes — para escalar o atendimento sem perder a qualidade clínica.</p>
+    </div>
+
+    <div class="frente-card">
+      <span class="frente-tag">Pilar 06</span>
+      <span class="frente-icon">✦</span>
+      <h3>Branding</h3>
+      <p>Construção e fortalecimento da identidade visual e posicionamento da marca — criando reconhecimento, confiança e desejo no mercado de saúde premium.</p>
+    </div>
+
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ═══ ESTRATÉGIAS ═══ -->
+<section>
+  <span class="section-tag">Estratégias · Alavancas de Crescimento</span>
+  <h2>6 Alavancas para<br>escalar no digital</h2>
+  <p class="section-lead">Ideias concretas que combinam tecnologia, experiência premium e o diferencial único da Smart Spa.</p>
+
+  <div class="strategies-grid">
+
+    <div class="strategy-card featured">
+      <span class="card-number">01</span>
+      <span class="card-icon">🧠</span>
+      <span class="card-tag">Tech · Alta Diferenciação</span>
+      <h3>Avaliação Metabólica Digital Gratuita</h3>
+      <p>Um questionário inteligente de 5 minutos que entrega ao lead um "Perfil Metabólico Personalizado" — calculando IMC, Taxa Metabólica Basal e perfil de risco. Cria um lead qualificado e vinculado emocionalmente à marca.</p>
+      <ul class="card-bullets">
+        <li>Cálculo de IMC com classificação de risco</li>
+        <li>Taxa Metabólica Basal estimada com precisão</li>
+        <li>Recomendação personalizada de qual plano faz sentido</li>
+      </ul>
+    </div>
+
+    <div class="strategy-card">
+      <span class="card-number">02</span>
+      <span class="card-icon">🎥</span>
+      <span class="card-tag">Conteúdo · Autoridade</span>
+      <h3>Smart Spa Academy</h3>
+      <p>Uma plataforma de cursos e conteúdo pago, apresentados pelos próprios profissionais da clínica. Nutricionistas e fisioterapeutas viram "professores" — e a expertise de 20 anos vira produto digital escalável.</p>
+      <ul class="card-bullets">
+        <li>Cursos sobre cetose, hormônios, metabolismo</li>
+        <li>Receitas e planos alimentares em vídeo</li>
+        <li>Masterclasses mensais ao vivo com Q&A</li>
+      </ul>
+    </div>
+
+    <div class="strategy-card">
+      <span class="card-number">03</span>
+      <span class="card-icon">🤝</span>
+      <span class="card-tag">Comunidade · Retenção</span>
+      <h3>Comunidade Premium "Smart Club"</h3>
+      <p>Um grupo exclusivo para clientes ativos, com acesso a conteúdo extra, desafios mensais e interação direta com os especialistas. Cria senso de pertencimento e reduz churn drasticamente.</p>
+      <ul class="card-bullets">
+        <li>Desafios de 21 dias com premiação</li>
+        <li>Check-ins semanais ao vivo</li>
+        <li>Depoimentos viram conteúdo de marketing</li>
+      </ul>
+    </div>
+
+    <div class="strategy-card featured">
+      <span class="card-number">04</span>
+      <span class="card-icon">📦</span>
+      <span class="card-tag">Produto Físico · Premium</span>
+      <h3>Kit Smart Spa em Casa</h3>
+      <p>Uma caixa premium enviada mensalmente com suplementos, fórmulas exclusivas e ferramentas de bem-estar. Transforma o cliente online em um cliente com produto físico em mãos — muito mais retenção e ticket médio.</p>
+      <ul class="card-bullets">
+        <li>Fórmulas exclusivas da Smart (já existem!)</li>
+        <li>Fita métrica, diário de protocolo, chá funcional</li>
+        <li>QR code que abre conteúdo exclusivo</li>
+      </ul>
+    </div>
+
+    <div class="strategy-card">
+      <span class="card-number">05</span>
+      <span class="card-icon">🌐</span>
+      <span class="card-tag">Escala · B2B</span>
+      <h3>Smart Spa para Empresas</h3>
+      <p>Vender o protocolo online como benefício corporativo — empresas pagam mensalidade para seus colaboradores terem acesso ao acompanhamento da Smart. Canal B2B com ticket maior e menor custo de aquisição.</p>
+      <ul class="card-bullets">
+        <li>Pacotes por colaborador (R$ 200–400/mês)</li>
+        <li>Relatório de saúde corporativa agregado</li>
+        <li>Palestra de saúde mensal incluída</li>
+      </ul>
+    </div>
+
+    <div class="strategy-card">
+      <span class="card-number">06</span>
+      <span class="card-icon">🔬</span>
+      <span class="card-tag">Premium · Alto Ticket</span>
+      <h3>Programa "Smart Elite 90 dias"</h3>
+      <p>Um programa de transformação total de 90 dias — combinando acompanhamento digital intensivo + 2 visitas presenciais ao spa + relatórios IA + kit físico + acesso vitalício à comunidade.</p>
+      <ul class="card-bullets">
+        <li>Oferta de alta percepção de valor</li>
+        <li>Limitado a N vagas por turma</li>
+        <li>Cria escassez real e narrativa de exclusividade</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ═══ FUNIL DE RECEITA ═══ -->
+<div class="full-width" style="background: #080f1e;">
+  <section>
+    <span class="section-tag">Arquitetura de Receita</span>
+    <h2>Funil de produtos<br>por ticket</h2>
+    <p class="section-lead">Uma estrutura em camadas que captura clientes em diferentes momentos de decisão e os move naturalmente para cima no funil.</p>
+
+    <div class="revenue-funnel">
+
+      <div class="funnel-tier tier-free">
+        <div class="tier-icon">🎁</div>
+        <div class="tier-info">
+          <div class="tier-name">Avaliação Metabólica Gratuita</div>
+          <div class="tier-desc">IMC · Taxa Metabólica Basal · Perfil de Risco · Geração de leads qualificados</div>
+        </div>
+        <div class="tier-price">R$ 0<span>isca digital</span></div>
+      </div>
+
+      <div class="funnel-tier tier-entry">
+        <div class="tier-icon">📚</div>
+        <div class="tier-info">
+          <div class="tier-name">Smart Academy · Acesso Mensal</div>
+          <div class="tier-desc">Cursos, receitas, masterclasses ao vivo · Produto digital puro, margem alta</div>
+        </div>
+        <div class="tier-price">R$ 97<span>/ mês</span></div>
+      </div>
+
+      <div class="funnel-tier tier-core">
+        <div class="tier-icon">💻</div>
+        <div class="tier-info">
+          <div class="tier-name">Smart Online + IA Coach</div>
+          <div class="tier-desc">Protocolo atual + Relatórios IA + Comunidade · Produto core evoluído</div>
+        </div>
+        <div class="tier-price">R$ 697<span>/ mês</span></div>
+      </div>
+
+      <div class="funnel-tier tier-premium">
+        <div class="tier-icon">📦</div>
+        <div class="tier-info">
+          <div class="tier-name">Smart Premium + Kit Físico</div>
+          <div class="tier-desc">Tudo do anterior + Caixa mensal de produtos + 1 sessão presencial / mês</div>
+        </div>
+        <div class="tier-price">R$ 1.497<span>/ mês</span></div>
+      </div>
+
+      <div class="funnel-tier tier-elite pulse">
+        <div class="tier-icon">👑</div>
+        <div class="tier-info">
+          <div class="tier-name">Smart Elite · Programa 90 Dias</div>
+          <div class="tier-desc">Transformação completa · IA + Presencial + Kit + Comunidade vitalícia · Vagas limitadas</div>
+        </div>
+        <div class="tier-price">R$ 5.500<span>único</span></div>
+      </div>
+
+    </div>
+  </section>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ═══ FOOTER ═══ -->
+<div class="footer">
+  <div class="footer-inner">
+
+    <div class="footer-eyebrow">A verdade sobre escala</div>
+
+    <h3>
+      O ativo mais valioso da Smart Spa<br>
+      já existe — são <span class="gold">20 anos<br>de expertise clínica.</span>
+    </h3>
+
+    <p class="footer-amplifica">
+      O digital não substitui isso.<br>
+      <strong>Ele amplifica.</strong>
+    </p>
+
+    <div class="footer-line"></div>
+
+  </div>
+</div>
+
+</body>
+</html>
